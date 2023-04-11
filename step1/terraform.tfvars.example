@@ -1,0 +1,34 @@
+# Spectro Cloud credentials
+sc_host         = "api.spectrocloud.com"
+sc_api_key      = ""
+sc_project_name = "Default" 
+
+# Infrastructure Cluster Profile info
+sc_cp_infra_profile_name         = "aks-infra"
+sc_cp_infra_profile_description  = "brief-description-of-profile"
+sc_cp_infra_profile_tags         = ["iac:terraform", "example:tag"]
+sc_cp_infra_profile_version              = "1.0.0"
+
+# Azure Cloud Account credentials
+# Follow the Spectro Cloud documentation to provision a new Azure Enterprise Application.
+# https://docs.spectrocloud.com/clusters/?clusterType=azure_cluster#creatinganazurecloudaccount
+cloud_account_name    = "azure-acct1"
+aks_cluster_name      = "cluster1" # do not use Azure or AKS in the name
+azure_subscription_id = ""
+azure_tenant_id       = ""
+azure_client_id       = ""
+azure_client_secret   = ""
+
+# SSH public key to inject into all K8s nodes
+# Insert your public key between the EOT markers
+# The public key starts with "ssh-rsa ...."
+cluster_ssh_public_key = <<-EOT
+ssh-rsa some-key
+EOT
+
+
+# Cluster Placement properties
+# https://azure.microsoft.com/en-us/global-infrastructure/geographies/#geographies
+# The region names are lowercase with spaces removed, e.g: "West US" -> westus
+azure_resource_group  = "MyResourceGroup"
+azure_region          = "eastus" 
