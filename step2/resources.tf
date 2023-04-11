@@ -15,9 +15,8 @@ resource "spectrocloud_cluster_group" "cg" {
     host_endpoint_type       = "LoadBalancer"
     cpu_millicore            = 10000
     memory_in_mb             = 16384
-    storage_in_gb            = 1000
+    storage_in_gb            = 10
     oversubscription_percent = 120
-    values = file("loft-values.yaml")
     #values= <<-EOT
     #  isolation:
     #    enabled: true
@@ -62,17 +61,26 @@ resource "spectrocloud_cluster_profile" "jenkins-app-profile" {
       jenkinsPassword: "spectrocloud"
       agent:
         resources:
-          limits: {}
-          requests: {}
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+          requests:
+            cpu: 256m
+            memory: 256Mi
       resources:
-        limits: {}
-        requests: {}
+        limits:
+          cpu: 1000m
+          memory: 1024Mi
+        requests:
+          cpu: 256m
+          memory: 256Mi
       persistence:
         enabled: false
       plugins: 
       - kubernetes
-      - git
-      - configuration-as-code
+      #- git
+      #- configuration-as-code
+      #- pipeline
     EOT
   }
   tags = ["name:jenkins", "terraform_managed:true"]
@@ -93,8 +101,8 @@ resource "spectrocloud_virtual_cluster" "cluster" {
     max_mem_in_mb = 6000
     min_cpu       = 0
     min_mem_in_mb = 0
-    max_storage_in_gb = "0"
-    min_storage_in_gb = "0"
+    max_storage_in_gb = "9"
+    min_storage_in_gb = "5"
   }
 
   timeouts {
