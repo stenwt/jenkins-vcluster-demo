@@ -1,5 +1,5 @@
 data "spectrocloud_cluster_group" "cg" { 
-  name = "cluster-group_demo"
+  name = "cluster-group-demo"
   context = "project"
 }
 
