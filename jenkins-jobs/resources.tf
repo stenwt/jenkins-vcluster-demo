@@ -1,6 +1,23 @@
-data "spectrocloud_cluster_group" "cg" { 
-  name = "cluster-group-demo"
+data "spectrocloud_cluster" "host_cluster0" {
+  name    = "cluster1"
   context = "project"
+}
+
+resource "spectrocloud_cluster_group" "cg" {
+  name = "cluster-group-demo"
+
+  clusters {
+    cluster_uid = data.spectrocloud_cluster.host_cluster0.id
+  }
+  context = "project"
+
+  config {
+    host_endpoint_type       = "LoadBalancer"
+    cpu_millicore            = 10000
+    memory_in_mb             = 16384
+    storage_in_gb            = 10
+    oversubscription_percent = 120
+  }
 }
 
 variable "example-app-image" {
@@ -48,7 +65,7 @@ resource "spectrocloud_application_profile" "example-app" {
 resource "spectrocloud_virtual_cluster" "cluster" {
   name = "virtual-cluster-jenkins-ci"
 
-  cluster_group_uid = data.spectrocloud_cluster_group.cg.id
+  cluster_group_uid = spectrocloud_cluster_group.cg.id
 
   resources {
     max_cpu       = 3

@@ -1,4 +1,0 @@
-# Spectro Cloud
-sc_host           = "api.spectrocloud.com" # Palette URL, excluding scheme, e.g., "dev.console.spectrocloud.com"
-sc_api_key        = ""
-sc_project_name   = "Default"
