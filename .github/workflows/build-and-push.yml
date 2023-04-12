@@ -41,6 +41,6 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
       - name: Webhook
         uses: distributhor/workflow-webhook@v2
-        with:
-          url: ${{ secrets.JENKINS_WEBHOOK_URL }}
+        env:
+          webhook_url: ${{ secrets.JENKINS_WEBHOOK_URL }}
 
