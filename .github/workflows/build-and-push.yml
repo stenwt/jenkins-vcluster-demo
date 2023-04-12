@@ -43,5 +43,5 @@ jobs:
         uses: distributhor/workflow-webhook@v2
         env:
           webhook_url: ${{ secrets.JENKINS_WEBHOOK_URL }}
-          webhook_secret: ""
+          webhook_secret: "why do you make me do this"
 
